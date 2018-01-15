@@ -1,20 +1,38 @@
 import React, { Component } from 'react'
-import { Paper } from 'yoastseo'
+import { Paper, SEOAssessor, ContentAssessor } from 'yoastseo'
 import { zipObject, omit } from 'lodash'
+import Jed from 'jed'
+
+import Presenter from './Presenter'
 
 class App extends Component {
     constructor(props) {
         super(props)
 
+        this.contentAssessor = new ContentAssessor(this.i18n())
+        this.seoAssessor = new SEOAssessor(this.i18n())
+
         this.state = {
             paper: new Paper()
         }
+
+        this.assessContent(this.state.paper)
+        this.assessSEO(this.state.paper)
 
         this.changeText = this.changeText.bind(this)
         this.changeTitle = this.changeTitle.bind(this)
         this.changeKeyword = this.changeKeyword.bind(this)
         this.changeUrl = this.changeUrl.bind(this)
         this.changeDescription = this.changeDescription.bind(this)
+    }
+
+    i18n() {
+        return new Jed({
+            domain: `js-text-analysis`,
+            locale_data: {
+                "js-text-analysis": { "": {} }
+            }
+        })
     }
 
     changePaper(item) {
@@ -32,6 +50,9 @@ class App extends Component {
         this.setState({
             paper: new Paper(paper.text, omit(paper, 'text'))
         })
+
+        this.assessContent(this.state.paper)
+        this.assessSEO(this.state.paper)
     }
 
     changeTitle(event) {
@@ -63,34 +84,47 @@ class App extends Component {
         return zipObject(keys, values)
     }
 
+    assessContent(paper) {
+        this.contentAssessor.assess(paper)
+    }
+
+    assessSEO(paper) {
+        this.seoAssessor.assess(paper)
+    }
+
     render() {
         return (
             <div className="App">
                 
-                <div className="form">
+                <div className="form" style={{ width: '49%', float: 'left' }}>
                     <div className="form__group">
-                        <label for="title">Title</label>
+                        <label htmlFor="title">Title</label>
                         <input type="text" id="title" onChange={this.changeTitle} value={this.state.paper.getTitle()} />
                     </div>
                     <div className="form__group">
-                        <label for="text">Content</label>
+                        <label htmlFor="text">Content</label>
                         <textarea id="text" onChange={this.changeText} value={this.state.paper.getText()} />
                     </div>
                     <div className="form__group">
-                        <label for="keyword">Focus Keyword</label>
+                        <label htmlFor="keyword">Focus Keyword</label>
                         <input type="text" id="keyword" onChange={this.changeKeyword} value={this.state.paper.getKeyword()} />
                     </div>
                     <div className="form__group">
-                        <label for="url">URL</label>
+                        <label htmlFor="url">URL</label>
                         <input type="url" id="url" onChange={this.changeUrl} value={this.state.paper.getUrl()} />
                     </div>
                     <div className="form__group">
-                        <label for="meta-description">Meta Description</label>
+                        <label htmlFor="meta-description">Meta Description</label>
                         <textarea id="meta-description" onChange={this.changeDescription} value={this.state.paper.getDescription()} />
                     </div>
                 </div>
 
-                <pre>{JSON.stringify(this.state.paper, null, 4)}</pre>
+                <div style={{ width: '49%', float: 'right' }}>
+                    <h2>Content</h2>
+                    <Presenter assessor={this.contentAssessor} />
+                    <h2>SEO</h2>
+                    <Presenter assessor={this.seoAssessor} />
+                </div>
 
             </div>
         )

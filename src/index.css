@@ -22,3 +22,22 @@ textarea {
 .form__group {
     margin-bottom: 20px;
 }
+
+
+
+.rating {
+    border-left: 1px solid #cccccc;
+    padding: 5px;
+}
+.rating--bad {
+    color: red;
+    border-left-color: red;
+}
+.rating--ok {
+    color: orange;
+    border-right-color: orange;
+}
+.rating--good {
+    color: green;
+    border-left-color: green;
+}
