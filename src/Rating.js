@@ -6,10 +6,10 @@ class Rating extends Component {
     }
     render() {
         return (
-            <p className={`rating rating--${this.getIndicatorColor()}`}>
-                <strong>{this.props.id}</strong> ({this.props.rating})<br />
+            <div className={`rating rating--${this.getIndicatorColor()}`}>
+                <span className="rating__score">{this.props.rating}</span>
                 <span dangerouslySetInnerHTML={{ __html: this.props.text }} />
-            </p>
+            </div>
         )
     }
 }

@@ -5,6 +5,8 @@ import Jed from 'jed'
 
 import Presenter from './Presenter'
 
+import InspectorImage from './inspector.svg'
+
 class App extends Component {
     constructor(props) {
         super(props)
@@ -95,36 +97,54 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                
-                <div className="form" style={{ width: '49%', float: 'left' }}>
-                    <div className="form__group">
-                        <label htmlFor="title">Title</label>
-                        <input type="text" id="title" onChange={this.changeTitle} value={this.state.paper.getTitle()} />
+
+                <header className="header" role="banner">
+                    <img className="header__brand" src={InspectorImage} alt="Inspector" />
+                </header>
+
+                <div className="wrapper">
+
+                    <form className="form">
+                        <div className="form__group">
+                            <label htmlFor="title" className="form__label">Title</label>
+                            <input type="text" className="input" id="title" onChange={this.changeTitle} value={this.state.paper.getTitle()} />
+                        </div>
+                        <div className="form__group">
+                            <label htmlFor="text" className="form__label">Content</label>
+                            <textarea className="input" id="text" onChange={this.changeText} value={this.state.paper.getText()} />
+                        </div>
+                        <div className="form__group">
+                            <label htmlFor="keyword" className="form__label">Focus Keyword</label>
+                            <input type="text" className="input" id="keyword" onChange={this.changeKeyword} value={this.state.paper.getKeyword()} />
+                        </div>
+                        <div className="form__group">
+                            <label htmlFor="url" className="form__label">URL</label>
+                            <input type="url" className="input" id="url" onChange={this.changeUrl} value={this.state.paper.getUrl()} />
+                        </div>
+                        <div className="form__group">
+                            <label htmlFor="meta-description" className="form__label">Meta Description</label>
+                            <textarea className="input" id="meta-description" onChange={this.changeDescription} value={this.state.paper.getDescription()} />
+                        </div>
+                    </form>
+
+                    <div className="output">
+
+                        <div className="ratings">
+                            <h3 class="ratings__heading">Content</h3>
+                            <Presenter assessor={this.contentAssessor} />
+                        </div>
+                        <div className="ratings">
+                            <h3 class="ratings__heading">SEO</h3>
+                            <Presenter assessor={this.seoAssessor} />
+                        </div>
+
                     </div>
-                    <div className="form__group">
-                        <label htmlFor="text">Content</label>
-                        <textarea id="text" onChange={this.changeText} value={this.state.paper.getText()} />
-                    </div>
-                    <div className="form__group">
-                        <label htmlFor="keyword">Focus Keyword</label>
-                        <input type="text" id="keyword" onChange={this.changeKeyword} value={this.state.paper.getKeyword()} />
-                    </div>
-                    <div className="form__group">
-                        <label htmlFor="url">URL</label>
-                        <input type="url" id="url" onChange={this.changeUrl} value={this.state.paper.getUrl()} />
-                    </div>
-                    <div className="form__group">
-                        <label htmlFor="meta-description">Meta Description</label>
-                        <textarea id="meta-description" onChange={this.changeDescription} value={this.state.paper.getDescription()} />
-                    </div>
+
                 </div>
 
-                <div style={{ width: '49%', float: 'right' }}>
-                    <h2>Content</h2>
-                    <Presenter assessor={this.contentAssessor} />
-                    <h2>SEO</h2>
-                    <Presenter assessor={this.seoAssessor} />
-                </div>
+                <footer className="footer" role="contentinfo">
+                    Built by <a href="https://www.crgeary.com" rel="noopener" target="_blank">CrGeary</a>
+                </footer>
 
             </div>
         )
