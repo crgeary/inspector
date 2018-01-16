@@ -1,5 +1,5 @@
 {
-  "name": "content-checker",
+  "name": "inspector",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
