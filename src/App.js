@@ -142,7 +142,7 @@ class App extends Component {
                 </div>
 
                 <footer className="footer" role="contentinfo">
-                    Built by <a href="https://www.crgeary.com" rel="noopener" target="_blank">CrGeary</a>
+                    Built by <a href="https://www.crgeary.com" rel="noopener noreferrer" target="_blank">CrGeary</a>
                 </footer>
 
             </div>
