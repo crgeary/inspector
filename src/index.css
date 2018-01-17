@@ -3,7 +3,7 @@ body {
     font-size: 17px;
     line-height: 1.5;
     font-family: Lato, sans-serif;
-    padding: 50px;
+    padding: 20px;
     background-color: #0b4969;
     background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath fill-rule='evenodd' d='M5 3.59L1.46.05.05 1.46 3.59 5 .05 8.54l1.41 1.41L5 6.41l3.54 3.54 1.41-1.41L6.41 5l3.54-3.54L8.54.05 5 3.59zM17 2h24v2H17V2zm0 4h24v2H17V6zM2 17h2v24H2V17zm4 0h2v24H6V17z'/%3E%3C/g%3E%3C/svg%3E"),
@@ -39,23 +39,17 @@ img {
 }
 
 
-.wrapper {
-    display: flex;
-}
-.form, .output {
-    flex: 1 1 50%;
-}
 .output {
-    margin-left: 15px;
+    margin-bottom: 50px;
 }
 
 
 .form {
     background-color: rgba(255, 255, 255, .85);
     border-radius: 2px;
-    margin-right: 20px;
     padding: 30px;
     box-shadow: 0 3px 20px rgba(0, 0, 0, .35);
+    margin-bottom: 50px;
 }
 .form__group {
     margin-bottom: 15px;
@@ -157,8 +151,28 @@ textarea.input {
     color: #ffffff;
     font-size: 14px;
     color: rgba(255, 255, 255, .5);
-    margin: 50px 0;
+    margin-bottom: 50px;
 }
 .footer a {
     color: inherit;
+}
+
+
+
+@media screen and (min-width: 767px) {
+    body {
+        margin: 50px;
+    }
+    .wrapper {
+        display: flex;
+    }
+    .form, .output {
+        flex: 1 1 50%;
+    }
+    .output {
+        margin-left: 15px;
+    }
+    .form {
+        margin-right: 20px;
+    }
 }
