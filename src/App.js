@@ -38,7 +38,7 @@ class App extends Component {
     }
 
     changePaper(item) {
-        const paper = Object.assign({}, {
+        const data = Object.assign({}, {
             text: this.state.paper.getText(),
             keyword: this.state.paper.getKeyword(),
             description: this.state.paper.getDescription(),
@@ -49,12 +49,11 @@ class App extends Component {
             permalink: this.state.paper.getPermalink(),
         }, item)
         
-        this.setState({
-            paper: new Paper(paper.text, omit(paper, 'text'))
-        })
+        const paper = new Paper(data.text, omit(data, 'text'))
 
-        this.assessContent(this.state.paper)
-        this.assessSEO(this.state.paper)
+        this.setState({ paper })
+        this.assessContent(paper)
+        this.assessSEO(paper)
     }
 
     changeTitle(event) {
