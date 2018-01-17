@@ -129,11 +129,11 @@ class App extends Component {
                     <div className="output">
 
                         <div className="ratings">
-                            <h3 class="ratings__heading">Content</h3>
+                            <h3 className="ratings__heading">Content</h3>
                             <Presenter assessor={this.contentAssessor} />
                         </div>
                         <div className="ratings">
-                            <h3 class="ratings__heading">SEO</h3>
+                            <h3 className="ratings__heading">SEO</h3>
                             <Presenter assessor={this.seoAssessor} />
                         </div>
 
