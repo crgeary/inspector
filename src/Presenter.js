@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { helpers } from 'yoastseo'
-import { forEach } from 'lodash'
+import { forEach, isObject } from 'lodash'
 
 import Rating from './Rating'
 
 class Presenter extends Component {
     getScores() {
         return this.props.assessor.getValidResults().map(r => {
+            if (!isObject(r)) {
+                return ``;
+            }
             r.rating = helpers.scoreToRating(r.score)
             return r
         });
