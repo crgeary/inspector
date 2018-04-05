@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Paper, SEOAssessor, ContentAssessor } from 'yoastseo'
 import { zipObject, omit } from 'lodash'
 import Jed from 'jed'
+import snarkdown from 'snarkdown'
 
 import Presenter from './Presenter'
 
@@ -15,7 +16,8 @@ class App extends Component {
         this.seoAssessor = new SEOAssessor(this.i18n())
 
         this.state = {
-            paper: new Paper()
+            paper: new Paper(),
+            text: ''
         }
 
         this.assessContent(this.state.paper)
@@ -39,7 +41,7 @@ class App extends Component {
 
     changePaper(item) {
         const data = Object.assign({}, {
-            text: this.state.paper.getText(),
+            text: this.state.text,
             keyword: this.state.paper.getKeyword(),
             description: this.state.paper.getDescription(),
             title: this.state.paper.getTitle(),
@@ -49,8 +51,8 @@ class App extends Component {
             permalink: this.state.paper.getPermalink(),
         }, item)
         
-        const paper = new Paper(data.text, omit(data, 'text'))
-
+        const paper = new Paper(snarkdown(data.text), omit(data, 'text'))
+        console.log(paper);
         this.setState({ paper })
         this.assessContent(paper)
         this.assessSEO(paper)
@@ -61,6 +63,7 @@ class App extends Component {
     }
 
     changeText(event) {
+        this.setState({ text: event.target.value })
         this.changePaper({ text: event.target.value })
     }
 
@@ -88,7 +91,7 @@ class App extends Component {
     assessContent(paper) {
         this.contentAssessor.assess(paper)
     }
-
+    
     assessSEO(paper) {
         this.seoAssessor.assess(paper)
     }
@@ -110,7 +113,8 @@ class App extends Component {
                         </div>
                         <div className="form__group">
                             <label htmlFor="text" className="form__label">Content</label>
-                            <textarea className="input" id="text" onChange={this.changeText} value={this.state.paper.getText()} />
+                            <textarea className="input" id="text" onChange={this.changeText} value={this.state.text} />
+                            <p class="form__description">Supports Markdown</p>
                         </div>
                         <div className="form__group">
                             <label htmlFor="keyword" className="form__label">Focus Keyword</label>
@@ -132,6 +136,7 @@ class App extends Component {
                             <h3 className="ratings__heading">Content</h3>
                             <Presenter assessor={this.contentAssessor} />
                         </div>
+
                         <div className="ratings">
                             <h3 className="ratings__heading">SEO</h3>
                             <Presenter assessor={this.seoAssessor} />

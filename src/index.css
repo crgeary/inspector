@@ -54,6 +54,12 @@ img {
 .form__group {
     margin-bottom: 15px;
 }
+.form__description {
+    margin: 0;
+    font-style: italic;
+    font-size: 75%;
+    color: rgba(#000000, .35);
+}
 
 .form__label {
     font-weight: bold;

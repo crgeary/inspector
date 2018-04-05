@@ -7,6 +7,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17",
+    "snarkdown": "^1.2.2",
     "yoastseo": "^1.28.0"
   },
   "scripts": {
