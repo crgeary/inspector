@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "lodash": "^4.17.4",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "lodash": "~4.17.4",
+    "react": "~16.2.0",
+    "react-dom": "~16.2.0",
     "react-scripts": "1.0.17",
-    "snarkdown": "^1.2.2",
-    "yoastseo": "^1.28.0"
+    "snarkdown": "~1.2.2",
+    "yoastseo": "~1.28.0"
   },
   "scripts": {
     "start": "react-scripts start",
